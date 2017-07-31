@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace：命名空间，做sql隔离 -->
+<mapper namespace="test">
+	<!-- 
+	id:sql语句唯一标识
+	parameterType:指定传入参数类型
+	resultType:返回结果集类型
+	#{}占位符：起到站位作用，如果传入的是基本类型，name#{}中的变量名称可以随意写
+	 -->
+	 <!-- 查询，根据用户id得到用户 -->
+	 <select id="findUserById" parameterType="java.lang.Integer" resultType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
+	 	select * from mybatis_user where id = #{id}
+	 </select>
+	 <!-- 根据用户名查询用户信息。 这里使用模糊查询.返回一个用户集合-->
+	 <!-- 
+	 	如果返回结果为集合，可以调用selectList()方法，这个方法返回的结果就是一个结合。所以映射文件中应该配置成集合泛型的类型
+	 	${}拼接符：字符串原样拼接，如果传入的参数是基本类型，name${}中的变量名称必须是value
+	 	注意：拼接符有sql注入的风险，所以慎重使用
+	  -->
+	 <select id="findUserByUsername" parameterType="java.lang.String" resultType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
+	 	select * from mybatis_user where username like '%${value}%'
+	 </select>
+</mapper>
