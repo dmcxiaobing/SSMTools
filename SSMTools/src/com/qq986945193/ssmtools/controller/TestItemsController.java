@@ -34,9 +34,9 @@ public class TestItemsController {
 		//将返回个页面的数据存入到模型和视图对象中
 		modelAndView.addObject("itemList",items);
 		//不配置InternalResourceViewResolver,需要指定全路径和名称
-		modelAndView.setViewName("/SpringMvc/jsp/itemList.jsp");
+		//modelAndView.setViewName("/SpringMvc/jsp/itemList.jsp");
 		//指定返回的页面的位置.由于我们在SpringMvc.xml中配置了视图解析器，所以不用写前缀和后缀路径。
-		//modelAndView.setViewName("itemList");
+		modelAndView.setViewName("itemList");
 		
 		return modelAndView;
 	}

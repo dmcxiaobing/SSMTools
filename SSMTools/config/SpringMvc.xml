@@ -17,12 +17,12 @@
 
 	<!-- 配置视图解析器
 		作用：在controller中指定页面路径的时候，就不用写页面的完整路径名称了。可以直接去写页面去掉扩展的名称 -->
-	<!-- 	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
-			真正的页面路径=前缀+去掉后缀名的页面名称+后缀
-			前缀
+		<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+			<!-- 真正的页面路径=前缀+去掉后缀名的页面名称+后缀 -->
+			<!-- 前缀 -->
 			<property name="prefix" value="/SpringMvc/jsp/"/>
-			后缀
+			<!-- 后缀 -->
 			<property name="suffix" value=".jsp"/>
-		</bean> -->
+		</bean>
 
 </beans>
