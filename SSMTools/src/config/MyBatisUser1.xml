@@ -23,4 +23,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <select id="findUserByUsername" parameterType="java.lang.String" resultType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
 	 	select * from mybatis_user where username like '%${value}%'
 	 </select>
+	<!-- 插入用户到数据库
+		#{}如果传入的不是基本类型的数据，而是pojo类型，那么#{}中的变量名称必须是pojo中对应的属性名
+		如果返回数据库自增主键，可以使用：select LAST_INSERT_ID();这个是sql语句
+	
+	 -->
+	 <insert id="insertUser" parameterType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
+		<!-- 执行select LAST_INSERT_ID();数据库函数，返回自增的主键 
+			keyProperty:将返回的主键放入传入参数的ID中保存
+			order：当前函数相对于insert语句的执行顺序，在insert前执行时before，在insert后执行时after
+			resultType:id的类型，也就是keyProperties中属性的类型
+		-->
+		<!-- insert into mybatis_user (username,birthday,sex,address) values(#{username},#{birthday},#{sex},#{address}) -->
+	 	<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			select LAST_INSERT_ID()
+		</selectKey>
+	 	insert into mybatis_user values (#{id},#{username},#{sex},#{birthday},#{address});
+	 </insert>
+	 <!-- 根据id删除用户 -->
+	 <delete id="deleteUserById" parameterType="int">
+	 	delete from mybatis_user where id = #{id}
+	 </delete>
+	 <!-- 更新用户信息 -->
+	<update id="updateUserById" parameterType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
+		update mybatis_user set username = #{username} where id = #{id}
+	</update>
+
 </mapper>
