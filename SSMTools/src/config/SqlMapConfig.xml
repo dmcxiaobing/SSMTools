@@ -18,9 +18,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 			定义后，别名等于类名，不区分大小写，但是我们还是建议按照java命名规则来。
 			首字母小写，以后每个单词的首字母大写。
 		 -->		
-		<package name="com.qq986945193.ssmtools.pojo.MyBatisUser1"/>
+		<package name="com.qq986945193.ssmtools.pojo"/>
 	</typeAliases>
-	<!-- 如果和spring框架整合后，environment配置将废除掉 -->
+	
+		<!-- 如果和spring框架整合后，environment配置将废除掉 -->
 	<environments default="development">
 		<environment id="development">
 			<!-- 使用jdbc事务管理 -->
@@ -34,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		</dataSource>
 		</environment>
 	</environments>
+	
 	<!-- 引入我们的javabean的配置 因为web项目，编译后会到classes目录下。所以路径写法不同 -->
 	<mappers>
 		<mapper resource="config/MyBatisUser1.xml"/>
@@ -44,8 +46,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 				2，接口和映射文件要放在同一个目录下
 				
 		 -->
-	<!-- 	 <mapper class=""/> -->
-	<!-- 	<package name="com.qq986945193.ssmtools.mapper"/> -->
+	<!-- <mapper class="com.qq986945193.ssmtools.mapper.MyBatisUserMapper1"/> -->
+	 	<!-- 
+	 		使用包扫描的方式批量引入Mapper接口。
+	 		使用规则：1接口的名称和映射文件名称除扩展名外要完全相同
+	 		2，接口和映射文件要放在同一目录下
+	 	 -->
+	 	<package name="com.qq986945193.ssmtools.mapper"/>
 	</mappers>
-	
+
 </configuration>

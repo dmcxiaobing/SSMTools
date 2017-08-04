@@ -17,7 +17,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{}占位符：起到占位作用，如果传入的是基本类型则可以随便写。
 		 -->
 	<select id="findUserById" parameterType="int" resultType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
-		select * from user where id = #{id}
+		select * from mybatis_user where id = #{id}
 	</select>
-
+ <!-- 根据用户名查询用户信息。 这里使用模糊查询.返回一个用户集合-->
+	 <!-- 
+	 	如果返回结果为集合，可以调用selectList()方法，这个方法返回的结果就是一个结合。所以映射文件中应该配置成集合泛型的类型
+	 	${}拼接符：字符串原样拼接，如果传入的参数是基本类型，name${}中的变量名称必须是value
+	 	注意：拼接符有sql注入的风险，所以慎重使用
+	  -->
+	 <select id="findUserByUsername" parameterType="java.lang.String" resultType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
+	 	select * from mybatis_user where username like '%${value}%'
+	 </select>
+	 <!-- 插入用户到数据库
+		#{}如果传入的不是基本类型的数据，而是pojo类型，那么#{}中的变量名称必须是pojo中对应的属性名
+		如果返回数据库自增主键，可以使用：select LAST_INSERT_ID();这个是sql语句
+	
+	 -->
+	 <insert id="insertUser" parameterType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
+		<!-- 执行select LAST_INSERT_ID();数据库函数，返回自增的主键 
+			keyProperty:将返回的主键放入传入参数的ID中保存
+			order：当前函数相对于insert语句的执行顺序，在insert前执行时before，在insert后执行时after
+			resultType:id的类型，也就是keyProperties中属性的类型
+		-->
+		<!-- insert into mybatis_user (username,birthday,sex,address) values(#{username},#{birthday},#{sex},#{address}) -->
+	 	<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+			select LAST_INSERT_ID()
+		</selectKey>
+	 	insert into mybatis_user values (#{id},#{username},#{sex},#{birthday},#{address});
+	 </insert>
 </mapper>

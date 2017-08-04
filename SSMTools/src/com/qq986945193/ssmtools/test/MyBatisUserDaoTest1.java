@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.qq986945193.ssmtools.dao.MyBatisUserDao1;
-import com.qq986945193.ssmtools.dao.MyBatisUserDaoImpl1;
+import com.qq986945193.ssmtools.dao.impl.MyBatisUserDaoImpl1;
 import com.qq986945193.ssmtools.pojo.MyBatisUser1;
 
 /**

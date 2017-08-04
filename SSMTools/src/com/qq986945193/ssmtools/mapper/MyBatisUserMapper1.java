@@ -15,7 +15,7 @@ public interface MyBatisUserMapper1 {
 	public MyBatisUser1 findUserById(Integer id);
 
 	//动态代理形式中。如果返回结果集List，那么mybatis会在生成实现类的时候自动调用selectList方法
-	public List<MyBatisUser1> findUserByUsername();
+	public List<MyBatisUser1> findUserByUsername(String username);
 
 
 	public void insertUser(MyBatisUser1 user1);
