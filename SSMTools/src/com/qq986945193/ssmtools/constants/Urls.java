@@ -8,6 +8,8 @@ package com.qq986945193.ssmtools.constants;
  * @OsChina空间: https://my.oschina.net/mcxiaobing
  */
 public class Urls {
+	/* 程序员小冰博客 */
+	public static final String DAVID_BLOG = "https://qq986945193.github.io/";
 	/* 程序员小冰CSDN博客 */
 	public static final String CSDN_BLOG_DAVID = "http://blog.csdn.net/qq_21376985";
 	/* 程序员小冰新浪微博 */
