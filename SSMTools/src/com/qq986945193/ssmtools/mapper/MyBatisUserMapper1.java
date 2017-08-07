@@ -22,4 +22,10 @@ public interface MyBatisUserMapper1 {
 	public void insertUser(MyBatisUser1 user1);
 
 	public List<MyBatisUser1> findUserByVo(MyBatisUserQueryVo1 vo1);
+
+	public Integer findUserCount();
+
+	public List<MyBatisUser1> findUserByUsernameAndSex();
+
+	public List<MyBatisUser1> findUserByIds(MyBatisUserQueryVo1 vo1);
 }

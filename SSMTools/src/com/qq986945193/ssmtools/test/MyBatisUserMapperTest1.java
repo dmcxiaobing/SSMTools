@@ -2,6 +2,7 @@ package com.qq986945193.ssmtools.test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -85,4 +86,46 @@ public class MyBatisUserMapperTest1 {
 		List<MyBatisUser1> users = mapper1.findUserByVo(vo);
 		System.out.println(users);
 	}
+	
+	@Test
+	public void testFindUserCount() throws Exception{
+		SqlSession session = sqlSessionFactory.openSession();
+		//通过getMapper来实例化接口
+		MyBatisUserMapper1 mapper1 = session.getMapper(MyBatisUserMapper1.class);
+		Integer count = mapper1.findUserCount();
+		System.out.println("count:"+count);
+	}
+	/**
+	 * 抽取sql语句 。
+	 */
+	@Test
+	public void testFindUserByUsernameAndSex() throws Exception{
+		SqlSession session = sqlSessionFactory.openSession();
+		//通过getMapper方法来实例化接口
+		MyBatisUserMapper1 mapper1 = session.getMapper(MyBatisUserMapper1.class);
+		MyBatisUser1 user1 = new MyBatisUser1();
+		user1.setUsername("david");
+		user1.setSex("man");
+		List<MyBatisUser1> users = mapper1.findUserByUsernameAndSex();
+		System.out.println(users);
+	}
+
+	/**
+	 * 根据多个id查询用户
+	 */
+	@Test
+	public void testFindUserByIds() throws Exception{
+		SqlSession session = sqlSessionFactory.openSession();
+		//通过getMapper方法来实例化接口
+		MyBatisUserMapper1 mapper1 = session.getMapper(MyBatisUserMapper1.class);
+		MyBatisUserQueryVo1 vo1 = new MyBatisUserQueryVo1();
+		List<Integer> ids = new ArrayList<Integer>();
+		ids.add(2);
+		ids.add(3);
+		ids.add(22);
+		vo1.setIds(ids);
+		List<MyBatisUser1> users = mapper1.findUserByIds(vo1);
+		System.out.println(users);
+	}
+
 }

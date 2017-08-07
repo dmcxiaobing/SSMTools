@@ -49,4 +49,53 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <select id="findUserByVo" parameterType="com.qq986945193.ssmtools.pojo.MyBatisUserQueryVo1" resultType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
 	 	select * from mybatis_user where username like '%${user.username}%'
 	 </select>
+	 <select id="findUserCount"  resultType="int">
+		select count(*) from mybatis_user
+	 </select>
+	 
+	 
+	 <!-- 
+	 	封装sql条件，封装后可以重用。
+	 	id:是这个sql条件的唯一标示
+	  -->
+	 <sql id="user_where">
+	 	<!-- where 标签作用；
+	 		会自动向sql语句中添加where关键词。会去掉第一个条件的关键字
+	  -->	
+	 	<where>
+	 		<if test="username!=null and username!=''">
+	 			and username like '%${username}%'
+	 		</if>
+	 		<if test="sex!=null and sex!=''">
+	 			and sex = #{sex}
+	 		</if>
+	 	</where>
+	 </sql>
+	 
+	 <select id="findUserByUsernameAndSex"  parameterType="com.qq986945193.ssmtools.pojo.MyBatisUser1" resultType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
+<!-- 		select * from mybatis_user where username like '%${username}%' and sex = #{sex}
+	 	select * from mybatis_user where username like '%david%' and sex = 'man' -->
+		<!-- 这里可以引用我们的sql。调用sql条件 -->
+		select * from mybatis_user
+		<include refid="user_where"></include>
+	 </select>
+	 
+	 <select id="findUserByIds" parameterType="com.qq986945193.ssmtools.pojo.MyBatisUserQueryVo1" resultType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
+	 	select * from mybatis_user
+	 	<where>
+	 		<if test="ids!=null">
+	 			<!-- 
+	 				foreach:循环传入的集合参数
+	 				collection：传入的集合的变量名称
+	 				item:每次循环将循环出的数据放入到这个变量中
+	 				open:循环开始拼接的字符串
+	 				close：循环结束拼接的字符串	
+	 			 -->
+	 			<foreach collection="ids" item="id" open="id in(" close=")" separator=",">
+	 				#{id}
+	 			</foreach>
+	 		
+	 		</if>
+	 	</where>
+	 </select>
 </mapper>
