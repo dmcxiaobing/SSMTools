@@ -1,0 +1,37 @@
+1. springMvc:是一个表现层框架,
+	作用:就是从请求中接收传入的参数,
+	     将处理后的结果数据返回给页面展示
+2. ssm整合:
+	1)Dao层
+		pojo和映射文件以及接口使用逆向工程生成
+		SqlMapConfig.xml   mybatis核心配置文件
+		ApplicationContext-dao.xml 整合后spring在dao层的配置
+			数据源
+			会话工厂
+			扫描Mapper
+	2)service层
+		事务			ApplicationContext-trans.xml
+		@Service注解扫描	ApplicationContext-service.xml
+	3)controller层
+		SpringMvc.xml 
+			注解扫描:扫描@Controller注解
+			注解驱动:替我们显示的配置了最新版的处理器映射器和处理器适配器
+			视图解析器:显示的配置是为了在controller中不用每个方法都写页面的全路径
+	4)web.xml
+		springMvc前端控制器配置
+		spring监听
+
+3.参数绑定(从请求中接收参数)重点
+	1)默认类型:
+		在controller方法中可以有也可以没有,看自己需求随意添加.
+		httpservletRqeust,httpServletResponse,httpSession,Model(ModelMap其实就是Mode的一个子类
+		,一般用的不多)
+	2)基本类型:string,double,float,integer,long.boolean
+	3)pojo类型:页面上input框的name属性值必须要等于pojo的属性名称
+	4)vo类型:页面上input框的name属性值必须要等于vo中的属性.属性.属性....
+	5)自定义转换器converter:
+		作用:由于springMvc无法将string自动转换成date所以需要自己手动编写类型转换器
+		需要编写一个类实现Converter接口
+		在springMvc.xml中配置自定义转换器
+		在springMvc.xml中将自定义转换器配置到注解驱动上
+	

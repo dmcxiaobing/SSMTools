@@ -45,4 +45,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</selectKey>
 	 	insert into mybatis_user values (#{id},#{username},#{sex},#{birthday},#{address});
 	 </insert>
+	 
+	 <select id="findUserByVo" parameterType="com.qq986945193.ssmtools.pojo.MyBatisUserQueryVo1" resultType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
+	 	select * from mybatis_user where username like '%${user.username}%'
+	 </select>
 </mapper>

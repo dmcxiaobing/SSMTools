@@ -3,6 +3,7 @@ package com.qq986945193.ssmtools.mapper;
 import java.util.List;
 
 import com.qq986945193.ssmtools.pojo.MyBatisUser1;
+import com.qq986945193.ssmtools.pojo.MyBatisUserQueryVo1;
 
 /**
  * 动态代理的方法实现
@@ -20,4 +21,5 @@ public interface MyBatisUserMapper1 {
 
 	public void insertUser(MyBatisUser1 user1);
 
+	public List<MyBatisUser1> findUserByVo(MyBatisUserQueryVo1 vo1);
 }

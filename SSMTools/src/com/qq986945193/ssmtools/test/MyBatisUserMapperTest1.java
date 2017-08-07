@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.qq986945193.ssmtools.mapper.MyBatisUserMapper1;
 import com.qq986945193.ssmtools.pojo.MyBatisUser1;
+import com.qq986945193.ssmtools.pojo.MyBatisUserQueryVo1;
 
 /**
  * 使用Mapper接口进行测试
@@ -70,5 +71,18 @@ public class MyBatisUserMapperTest1 {
 		user1.setAddress("百度一下，google");
 		mapper1.insertUser(user1);
 		session.commit();
+	}
+	
+	@Test
+	public void testFindUserByVo(){
+		SqlSession session = sqlSessionFactory.openSession();
+		//通过getMapper方法来实例化接口
+		MyBatisUserMapper1 mapper1 = session.getMapper(MyBatisUserMapper1.class);
+		MyBatisUserQueryVo1 vo = new MyBatisUserQueryVo1();
+		MyBatisUser1 user1 = new MyBatisUser1();
+		user1.setUsername("david");
+		vo.setUser(user1);
+		List<MyBatisUser1> users = mapper1.findUserByVo(vo);
+		System.out.println(users);
 	}
 }
