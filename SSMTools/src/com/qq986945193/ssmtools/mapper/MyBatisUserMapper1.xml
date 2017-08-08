@@ -98,4 +98,67 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 		</if>
 	 	</where>
 	 </select>
+	 
+	 <!-- 一对一：自动映射 -->
+	 <select id="findOrdersAndUser1" resultType="com.qq986945193.ssmtools.pojo.MyBatisCustomerOrders">
+	 	select o.*,u.id uid,username,birthday,sex,address
+	 	from mybatis_orders o,mybatis_user u 
+	 	where o.user_id = u.id
+	 </select>
+	 <!-- 一对一：手动映射 -->
+	 <resultMap type="com.qq986945193.ssmtools.pojo.MyBatisOrders1" id="orderAndUserResultMap">
+	 	<!-- 
+	 		id标签指定主键字段对应关系
+	 		column：列 数据库中的字段名称
+	 		property:属性，java中pojo中的属性名称
+	 	 -->
+	 	<id column="id" property="id"/>
+	 	<!-- result：标签指定非主键字段的对应关系 -->
+	 	<result column="user_id" property="user_id"/>
+		<result column="number" property="number"/>
+		<result column="createtime" property="createtime"/>
+		<result column="note" property="note"/>
+		<!-- 
+			association这个标签指定单个对象的对应关系
+			property:指定将数据放入MyBatisOrders1中的user属性中
+			javaType:user属性的类型
+		 -->
+		 <association property="user" javaType="com.qq986945193.ssmtools.pojo.MyBatisUser1">
+		 	<id column="id" property="id"/>
+		 	<result column="username" property="username"/>
+		 	<result column="birthday" property="birthday"/>
+		 	<result column="sex" property="sex"/>
+		 	<result column="address" property="address"/>
+		 </association>
+	 </resultMap>
+	 
+	 <select id="findOrdersAndUser2" resultMap="orderAndUserResultMap">
+		select o.*,u.id uid,username,birthday,sex,address
+	 	from mybatis_orders o,mybatis_user u 
+	 	where o.user_id = u.id
+	 </select>
+	 <!-- 一对多，一个用户对应多个订单..前面都是查询订单和用户。这里查询用户中的订单..用户然后拼接订单 -->
+	<resultMap type="com.qq986945193.ssmtools.pojo.MyBatisUser1" id="userAndOrdersResultMap">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="birthday" property="birthday"/>
+		<result column="sex" property="sex"/>
+		<result column="address" property="address"/>
+		<!-- 由于是一个集合，所以对应的集合对象关系映射为
+			property:将数据放入user对象中的orderlist属性中
+			ofType:指定orderList属性的泛型类型
+		 -->
+		 <collection property="ordersList" ofType="com.qq986945193.ssmtools.pojo.MyBatisOrders1">
+		 	<id column="id" property="id"/>
+		 	<result column="user_id" property="user_id"/>
+			<result column="number" property="number"/>
+			<result column="createtime" property="createtime"/>
+		 </collection>
+	</resultMap>
+	
+	 <select id="findUserAndOrders" resultMap="userAndOrdersResultMap">
+	 	select u.*,o.id oid,user_id,number,createtime
+	 	from mybatis_user u,mybatis_orders o
+	 	where u.id = o.user_id
+	 </select>
 </mapper>

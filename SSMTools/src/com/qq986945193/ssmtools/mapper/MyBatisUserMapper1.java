@@ -2,6 +2,9 @@ package com.qq986945193.ssmtools.mapper;
 
 import java.util.List;
 
+import com.qq986945193.ssmtools.generator.po.MybatisOrders;
+import com.qq986945193.ssmtools.pojo.MyBatisCustomerOrders;
+import com.qq986945193.ssmtools.pojo.MyBatisOrders1;
 import com.qq986945193.ssmtools.pojo.MyBatisUser1;
 import com.qq986945193.ssmtools.pojo.MyBatisUserQueryVo1;
 
@@ -28,4 +31,10 @@ public interface MyBatisUserMapper1 {
 	public List<MyBatisUser1> findUserByUsernameAndSex();
 
 	public List<MyBatisUser1> findUserByIds(MyBatisUserQueryVo1 vo1);
+
+	public List<MyBatisCustomerOrders> findOrdersAndUser1();
+
+	public List<MyBatisOrders1> findOrdersAndUser2();
+
+	public List<MyBatisUser1> findUserAndOrders();
 }

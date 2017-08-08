@@ -12,9 +12,13 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.qq986945193.ssmtools.generator.po.MybatisOrders;
 import com.qq986945193.ssmtools.mapper.MyBatisUserMapper1;
+import com.qq986945193.ssmtools.pojo.MyBatisCustomerOrders;
+import com.qq986945193.ssmtools.pojo.MyBatisOrders1;
 import com.qq986945193.ssmtools.pojo.MyBatisUser1;
 import com.qq986945193.ssmtools.pojo.MyBatisUserQueryVo1;
+
 
 /**
  * 使用Mapper接口进行测试
@@ -127,5 +131,39 @@ public class MyBatisUserMapperTest1 {
 		List<MyBatisUser1> users = mapper1.findUserByIds(vo1);
 		System.out.println(users);
 	}
-
+	/**
+	 * 一对一映射 自动映射
+	 */
+	@Test
+	public void testFindOrdersAndUser1() throws Exception{
+		SqlSession openSession = sqlSessionFactory.openSession();
+		//通过getMapper方法来实例化接口
+		MyBatisUserMapper1 mapper = openSession.getMapper(MyBatisUserMapper1.class);
+		List<MyBatisCustomerOrders> listsOrders = mapper.findOrdersAndUser1();
+		System.out.println(listsOrders);
+	}
+	
+	/**
+	 * 一对一，手动映射
+	 */
+	@Test
+	public void testFindOrdersAndUser2() throws Exception{
+		SqlSession openSession = sqlSessionFactory.openSession();
+		//通过getMapper方法来实例化接口
+		MyBatisUserMapper1 mapper = openSession.getMapper(MyBatisUserMapper1.class);
+		List<MyBatisOrders1> listsOrders = mapper.findOrdersAndUser2();
+		System.out.println(listsOrders);
+	}
+	/**
+	 * 一对多
+	 */
+	@Test
+	public void testFindUserAndOrders() throws Exception{
+		SqlSession openSession = sqlSessionFactory.openSession();
+		//通过getMapper方法来实例化接口
+		MyBatisUserMapper1 mapper = openSession.getMapper(MyBatisUserMapper1.class);
+		List<MyBatisUser1> users = mapper.findUserAndOrders();
+		System.out.println(users);
+	}
+	
 }

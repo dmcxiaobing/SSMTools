@@ -1,36 +1,23 @@
 package com.qq986945193.ssmtools.pojo;
 
 import java.util.Date;
-import java.util.List;
-
-
 /**
- * 一个实体类  一个用户对应多个订单，一对多，需要添加一个集合
+ * 继承order，然后加入用户的字段.如果继承，则父类中去掉user对象
  * @Author ：程序员小冰
  * @新浪微博 ：http://weibo.com/mcxiaobing
  * @GitHub: https://github.com/QQ986945193
  */
-public class MyBatisUser1 {
+public class MyBatisCustomerOrders extends MyBatisOrders1{
 
-	private int id;
-	private String username;//用户名
-	private String sex;//性别
-	private Date birthday;//生日
-	private String address;//地址
-	
-	private List<MyBatisOrders1> ordersList;
-	
-	
-	public List<MyBatisOrders1> getOrdersList() {
-		return ordersList;
-	}
-	public void setOrdersList(List<MyBatisOrders1> ordersList) {
-		this.ordersList = ordersList;
-	}
-	public int getId() {
+	private Integer id;
+	private String username;
+	private String sex;
+	private Date birthday;
+	private String address;
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getUsername() {
@@ -59,7 +46,7 @@ public class MyBatisUser1 {
 	}
 	@Override
 	public String toString() {
-		return "MyBatisUser1 [id=" + id + ", username=" + username + ", sex=" + sex + ", birthday=" + birthday
+		return "MyBatisCustomerOrders [id=" + id + ", username=" + username + ", sex=" + sex + ", birthday=" + birthday
 				+ ", address=" + address + "]";
 	}
 	
