@@ -26,6 +26,8 @@ public class MyBatisUserDaoImpl1 implements MyBatisUserDao1 {
 		//SqlSession是线程不安全的，所以它的最佳使用范围在方法体内
 		SqlSession sqlSession = sqlSessionFactory.openSession();
 		MyBatisUser1 user1 = sqlSession.selectOne("test.findUserById", id);
+		//整合后会话归spring管理,所以不需要手动关闭.
+		//sqlSession.close();
 		return user1;
 	}
 	/**

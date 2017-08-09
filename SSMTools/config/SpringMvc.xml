@@ -11,6 +11,7 @@
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd
         http://www.springframework.org/schema/context 
         http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	
 		<!-- 由于我们配置的Controller注解，所以要开启扫描 -->
 		<context:component-scan base-package="com.qq986945193.ssmtools.controller"/>
 
@@ -24,5 +25,24 @@
 			<!-- 后缀 -->
 			<property name="suffix" value=".jsp"/>
 		</bean>
-
+		
+	<!-- 
+		如果没有显示的配置处理器映射器和处理器适配器，那么SpringMvc会去
+		默认的dispathcerServlet.properties中查找对应的处理器映射器和处理器适配器去使用，
+		对于这样每个请求都要去扫描一次他的默认配置文件，效率非常低，会降低访问速度。所以要显示的去配置
+		处理器映射器和处理器适配器。	
+	 -->
+        <!-- 注解形式的处理器映射器 -->
+<!--         <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"></bean> -->
+        <!-- 注解形式的处理器适配器 -->
+<!--         <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"></bean> -->
+        
+        <!-- 配置最新版的注解的处理器映射器 -->
+<!--         <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"></bean> -->
+        <!-- 配置最新版的注解的处理器适配器 -->
+<!--         <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"></bean> -->
+	 
+	 	<!-- 我们可以使用注解驱动，
+	 	直接替换我们配置的最新版处理器映射器和处理器适配器 -->
+	 	<mvc:annotation-driven></mvc:annotation-driven>
 </beans>
