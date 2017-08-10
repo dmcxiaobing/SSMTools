@@ -2,7 +2,6 @@ package com.qq986945193.ssmtools.dao.impl;
 
 import java.util.List;
 
-import javax.xml.registry.infomodel.User;
 
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
